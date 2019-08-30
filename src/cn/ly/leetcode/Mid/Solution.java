@@ -47,6 +47,14 @@ class Solution {
                 int sum = nums[i] + nums[L] + nums[R];
                 if (sum == 0) {
                     list.add(Arrays.asList(nums[i], nums[L], nums[R]));
+                    /**
+                     * 排除左右指针重复数据 例如
+                     *    [-2,-1,-1,0,0, 2,2,2,-4]
+                     *     ↑      ↑       ↑
+                     *    base     L        R
+                     *    此时数组中0，0 2，2，2  都是重复数据，如果不判断会重复添加，
+                     * 故下面两个while语句是去掉重复数据00，222
+                     */
                     while (L < R && nums[L] == nums[L + 1]) {
                         L++;
                     }
