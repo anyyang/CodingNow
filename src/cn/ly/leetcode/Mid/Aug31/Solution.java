@@ -1,6 +1,7 @@
 package cn.ly.leetcode.Mid.Aug31;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -29,7 +30,10 @@ import java.util.Stack;
         */
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        Stack<Integer> result = new Stack<Integer>();
+        // Stack<Integer> result = new Stack<Integer>();
+        //记录头元素，最后返回的时候，需要去掉首元素
+        ListNode header = new ListNode(0);
+        ListNode flag = header;
         //保存进位标记
         int temp = 0;
         while (l1 != null || l2 != null || temp != 0) {
@@ -37,19 +41,19 @@ class Solution {
                 int sum = l1.val + l2.val + temp;
                 if (sum < 10) {
                     //没有溢出位
-                    result.push(sum);
+                    flag = addNode(flag, sum);
                     //temp 归零
                     temp = 0;
                 } else {
                     //大于10 的时候 取模运算，把余数放入到栈中
-                    result.push(sum % 10);
+                    flag = addNode(flag, sum % 10);
                     //标记temp为1  有溢出位
                     temp = 1;
                 }
                 l1 = l1.next;
                 l2 = l2.next;
                 if (l1 == null && l2 == null && temp == 1) {
-                    result.push(1);
+                    flag = addNode(flag, 1);
                     temp = 0;
                 }
             } else if (l1 != null && l2 == null) {
@@ -57,18 +61,18 @@ class Solution {
                 int sum = l1.val + temp;
                 if (sum < 10) {
                     //没有溢出位
-                    result.push(sum);
+                    flag = addNode(flag, sum);
                     //temp 归零
                     temp = 0;
                 } else {
                     //大于10 的时候 取模运算，把余数放入到栈中
-                    result.push(sum % 10);
+                    flag = addNode(flag, sum % 10);
                     //标记temp为1  有溢出位
                     temp = 1;
                 }
                 l1 = l1.next;
                 if (l1 == null && temp == 1) {
-                    result.push(1);
+                    flag = addNode(flag, 1);
                     temp = 0;
                 }
 
@@ -78,36 +82,38 @@ class Solution {
                 int sum = l2.val + temp;
                 if (sum < 10) {
                     //没有溢出位
-                    result.push(sum);
+                    flag = addNode(flag, sum);
                     //temp 归零
                     temp = 0;
                 } else {
                     //大于10 的时候 取模运算，把余数放入到栈中
-                    result.push(sum % 10);
+                    flag = addNode(flag, sum % 10);
                     //标记temp为1  有溢出位
                     temp = 1;
                 }
                 l2 = l2.next;
                 if (l2 == null && temp == 1) {
-                    result.push(1);
+                    flag = addNode(flag, 1);
                     temp = 0;
                 }
             }
         }
-        ListNode headNode =null;
-        ListNode flag = null;
-        while(!result.empty()){
-           Integer m = result.pop();
-           if(headNode == null){
-               headNode = new ListNode(m);
-               flag =headNode;
-           }else{
-               headNode = new ListNode(m);
-               headNode.next = flag;
-               flag = headNode;
-           }
-        }
-        return headNode;
+        //去掉首元素返回
+        return header.next;
+    }
+
+    /**
+     * @param flag 尾元素
+     * @return 返回尾元素
+     * @
+     */
+    public ListNode addNode(ListNode flag, int sum) {
+        /**
+         * 移动指针时刻指向最后的元素
+         */
+        flag.next = new ListNode(sum);
+        flag = flag.next;
+        return flag;
     }
 
     public static void main(String args[]) {
