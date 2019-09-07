@@ -23,42 +23,43 @@ public class Solution {
     public static void main(String args[]) {
         Solution so = new Solution();
 
-        so.longestPalindrome("abcdefggfedcba");
+        String str = so.longestPalindrome("ccc");
+        System.out.println(str);
     }
 
     public String longestPalindrome(String s) {
-        if (s == null || s.length() == 0) {
-            return "";
+
+        int result[] = new int[2];
+        char arrays[] = s.toCharArray();
+        for (int i = 0; i < arrays.length; i++) {
+            int left = i;
+            int right = left + 1;
+            //   abccba   完全对称情况  以cc 为中心向两侧延申  <--  cc   -->
+            while (left >= 0 && right < arrays.length && arrays[left] == arrays[right]) {
+                left--;
+                right++;
+            }
+            if (right - left > result[1] - result[0]) {
+                result[0] = left;
+                result[1] = right;
+                //   System.out.println("1.x=" + x + " y=" + y);
+            }
+            left = i - 1;
+            right = i + 1;
+            // abcdcba   有对称轴的对称      以d为中心向两侧延申    <-- d   -->
+            while (left >=0 && right < arrays.length && arrays[left] == arrays[right]) {
+                left--;
+                right++;
+            }
+            if (right - left > result[1] - result[0]) {
+                result[0] = left;
+                result[1] = right;
+                //  System.out.println("2.x=" + x + " y=" + y);
+            }
+
         }
-//         保存起始位置，测试了用数组似乎能比全局变量稍快一点
-        int[] range = new int[2];
-        char[] str = s.toCharArray();
-        for (int i = 0; i < s.length(); i++) {
-//             把回文看成中间的部分全是同一字符，左右部分相对称
-//             找到下一个与当前字符不同的字符
-            i = findLongest(str, i, range);
-        }
-        return s.substring(range[0], range[1] + 1);
+        return s.substring(result[0] + 1, result[1]);
     }
 
-    public static int findLongest(char[] str, int low, int[] range) {
-//         查找中间部分
-        int high = low;
-        while (high < str.length - 1 && str[high + 1] == str[low]) {
-            high++;
-        }
-//         定位中间部分的最后一个字符
-        int ans = high;
-//         从中间向左右扩散
-        while (low > 0 && high < str.length - 1 && str[low - 1] == str[high + 1]) {
-            low--;
-            high++;
-        }
-//         记录最大长度
-        if (high - low > range[1] - range[0]) {
-            range[0] = low;
-            range[1] = high;
-        }
-        return ans;
-    }
+
 }
