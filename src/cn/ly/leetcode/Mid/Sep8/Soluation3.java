@@ -22,5 +22,6 @@ public class Soluation3 {
         Soluation3 s3 = new Soluation3();
         int re = s3.maximumSum(a);
         System.out.println(re);
+
     }
 }

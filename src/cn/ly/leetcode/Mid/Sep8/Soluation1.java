@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * 求出今天星期几
+ */
 public class Soluation1 {
     public String dayOfTheWeek(int day, int month, int year) {
         String strDate= year+"-"+month+"-"+day;
