@@ -11,40 +11,30 @@ import java.util.concurrent.CountDownLatch;
 
 class FooBar {
     private int n;
-    private CountDownLatch countDownLatchA;
-    private CountDownLatch countDownLatchB;
-
-
 
     public FooBar(int n) {
         this.n = n;
-        countDownLatchA = new CountDownLatch(n);
-        countDownLatchB = new CountDownLatch(n);
-        try {
-            countDownLatchB.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void foo(Runnable printFoo) throws InterruptedException {
 
         for (int i = 0; i < n; i++) {
-            countDownLatchA.countDown();
+
             // printFoo.run() outputs "foo". Do not change or remove this line.
             printFoo.run();
-            countDownLatchB.await();
+            printFoo.notifyAll();
+            printFoo.wait();
         }
     }
 
     public void bar(Runnable printBar) throws InterruptedException {
 
         for (int i = 0; i < n; i++) {
-            countDownLatchB.countDown();
             // printBar.run() outputs "bar". Do not change or remove this line.
-
+            printBar.wait();
             printBar.run();
-            countDownLatchA.await();
+            printBar.notifyAll();
         }
     }
 }
