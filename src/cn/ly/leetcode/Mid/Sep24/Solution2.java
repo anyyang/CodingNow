@@ -501,11 +501,11 @@ public class Solution2 {
         }
         fast = head;
         slow = head;
-        while(){
-
+        while(true){
+            return null;
         }
 
-        return null;
+
     }
 
 }
