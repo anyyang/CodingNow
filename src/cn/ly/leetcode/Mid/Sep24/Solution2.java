@@ -34,6 +34,7 @@ package cn.ly.leetcode.Mid.Sep24;
  输入：head = [1,2], pos = 0
  输出：tail connects to node index 0
  解释：链表中有一个环，其尾部连接到第一个节点。
+
  */
 
 import java.util.HashMap;
@@ -50,6 +51,11 @@ import java.util.HashMap;
  * }
  */
 public class Solution2 {
+    /**
+     * 使用hashcode 解决闭环查询
+     * @param head
+     * @return
+     */
     public ListNode detectCycle(ListNode head) {
         HashMap<Integer, Integer> map = new HashMap();
         while (head != null) {
@@ -63,6 +69,20 @@ public class Solution2 {
         }
         return null;
     }
+    public ListNode detectCycle2(ListNode head) {
+        HashMap<Integer, Integer> map = new HashMap();
+        while (head != null) {
+            Integer local = map.get(head.hashCode());
+            if (local == null) {
+                map.put(head.hashCode(), 1);
+            } else {
+                return head;
+            }
+            head = head.next;
+        }
+        return null;
+    }
+
 }
 
 class ListNode {
