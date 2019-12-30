@@ -476,37 +476,7 @@ public class Solution2 {
         return null;
     }
 
-    public ListNode detectCycle2(ListNode head) {
-        ListNode fast = head;
-        ListNode slow = head;
-        Integer cycler = null;
-        while (fast != null) {
-            slow = slow.next;
-            if (fast.next != null) {
-                fast = fast.next.next;
-            } else {
-                return null;
-            }
-            int count = 0;
-            if (slow == fast) {
-                ++count;
-                cycler = new Integer(0);
-                if (count == 2) {
-                    break;
-                }
-            }
-            if (cycler != null) {
-                cycler++;
-            }
-        }
-        fast = head;
-        slow = head;
-        while(true){
-            return null;
-        }
 
-
-    }
 
 }
 
