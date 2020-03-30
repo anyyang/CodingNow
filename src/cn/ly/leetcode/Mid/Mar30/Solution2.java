@@ -3,24 +3,31 @@ package cn.ly.leetcode.Mid.Mar30;
 
 public class Solution2 {
 
+    public ListNode swapPairs2(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode next = head.next;
+        head.next = swapPairs(next.next);
+        next.next = head;
+        return next;
+    }
+
+
     public ListNode swapPairs(ListNode head) {
-        swap(head);
+        head = swap(head);
         return head;
     }
 
     ListNode swap(ListNode head) {
-        if (head == null ) {
-            return null ;
-        }
-        if(head.next==null){
-            return head;
+        if (head == null || head.next==null) {
+            return head ;
         }
         ListNode temp = head.next;
         head.next = temp.next;
+        temp.next.next = swap(temp.next.next);
         temp.next = head;
-        head=temp;
-        head.next.next = swap(head.next.next);
-        return head;
+        return temp;
     }
 
     public static void main(String[] args) {
@@ -31,7 +38,7 @@ public class Solution2 {
         }
 
         header.print( header);
-        s2.swapPairs( header);
+        s2.swapPairs2( header);
         System.out.println();
         header.print( header);
     }
