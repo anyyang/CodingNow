@@ -1,5 +1,8 @@
 package cn.ly.leetcode.Mid.Apr7;
 
+/**
+ * .https://leetcode-cn.com/problems/lru-cache/submissions/
+ */
 class LRUCache {
     Node head = new Node();
     int capaticy = 0;
