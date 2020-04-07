@@ -11,8 +11,8 @@ class LRUCache {
 
     public int get(int key) {
         Node finder = head.next;
-        if(finder!=null ){
-            if( finder.key==key){
+        if (finder != null) {
+            if (finder.key == key) {
                 return finder.value;
             }
         }
@@ -20,17 +20,18 @@ class LRUCache {
             if (finder.key == key) {
                 break;
             }
-            finder=finder.next;
+            finder = finder.next;
         }
         if (finder == null) {
             return -1;
         }
         finder.pre.next = finder.next;  //  旧位置前后切割
-        if(finder.next!=null){
+        if (finder.next != null) {
             finder.next.pre = finder.pre;
         }
 
         finder.next = head.next;        //前后焊接
+        head.next.pre = finder;
         finder.pre = head;
         head.next = finder;
 
@@ -38,6 +39,12 @@ class LRUCache {
     }
 
     public void put(int key, int value) {
+        if (Node.count == 1) {
+            Node node = new Node(key, value);
+            head.next = node;
+            node.pre = head;
+            return ;
+        }
         if (Node.count == capaticy) {
             Node temp = head.next;
             while (temp.next != null) {
@@ -60,16 +67,12 @@ class LRUCache {
     }
 
     public static void main(String[] args) {
-        LRUCache lru = new LRUCache(2);
-        lru.put(1, 1);
-        lru.put(2, 2);
-        lru.put(3, 3);
-        System.out.println(lru.get(1));
+        LRUCache lru = new LRUCache(1);
+        lru.put(2, 1);
         System.out.println(lru.get(2));
-        lru.put(4, 4);
-        System.out.println( lru.get(4));
-        System.out.println( lru.get(2));
-        System.out.println( lru.get(3));
+        lru.put(3, 2);
+        System.out.println(lru.get(2));
+        System.out.println(lru.get(3));
 
     }
 }
