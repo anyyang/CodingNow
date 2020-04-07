@@ -42,7 +42,12 @@ class LRUCache {
     }
 
     public void put(int key, int value) {
-        if (Node.count == 1) {
+        int x = get(key);
+        if(x!=-1){
+            head.next.value=value;
+            return ;
+        }
+        if (capaticy == 1) {
             Node node = new Node(key, value);
             head.next = node;
             node.pre = head;
@@ -70,12 +75,14 @@ class LRUCache {
     }
 
     public static void main(String[] args) {
-        LRUCache lru = new LRUCache(1);
+        LRUCache lru = new LRUCache(2);
         lru.put(2, 1);
+        lru.put(2, 2);
         System.out.println(lru.get(2));
-        lru.put(3, 2);
+        lru.put(1,1);
+        lru.put(4,1);
         System.out.println(lru.get(2));
-        System.out.println(lru.get(3));
+
 
     }
 }
