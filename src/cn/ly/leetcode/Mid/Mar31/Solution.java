@@ -1,5 +1,6 @@
 package cn.ly.leetcode.Mid.Mar31;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,5 +76,7 @@ class Solution {
     public static void main(String[] args) {
         Solution s2=new Solution();
         s2.generate2(5);
+=======
+>>>>>>> 7f6a587e776f4fdbd129ce3d33e3224a3b13f00d
     }
 }
