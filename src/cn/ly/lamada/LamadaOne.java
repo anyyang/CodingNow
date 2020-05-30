@@ -1,8 +1,9 @@
 package cn.ly.lamada;
 
-import org.junit.jupiter.api.DynamicTest;
+
 import org.junit.jupiter.api.Test;
 
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -13,8 +14,20 @@ import java.util.function.Predicate;
  * @
  */
 public class LamadaOne {
+
     /**
+     * 一个参数没有返回值
+     *
+     */
+    public  void  test1(){
+        String x="1";
+        Consumer con = (m)-> System.out.println(m);
+        con.accept(x);
+    }
+    /**
+     *  一个参数  有返回值的
      * Predicate 判断年龄是否合法
+     *
      */
     @Test
     public void PredicatedAge() {
