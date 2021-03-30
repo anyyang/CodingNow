@@ -20,3 +20,4 @@ bin-release/
 *.iml
 /.idea
 /out/
+*.class

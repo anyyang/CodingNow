@@ -1,7 +1,6 @@
 package cn.ly.lamada;
 
 
-import org.junit.jupiter.api.Test;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -29,7 +28,6 @@ public class LamadaOne {
      * 一个参数  有返回值的
      * Predicate 判断年龄是否合法
      */
-    @Test
     public void PredicatedAge() {
         Predicate<User> checkage = (user) -> user.getAge() > 0;
         User user = new User();
@@ -39,7 +37,6 @@ public class LamadaOne {
     /***
      *  是用Function<T,R,u>实例化出对象
      */
-    @Test
     public void Function() {
         Function<String, User> conductor = User::new;
         Consumer<User> con2 = (x) -> x.getAge();
