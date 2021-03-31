@@ -1,4 +1,4 @@
-package cn.ly;
+package cn.ly.jvm;
 
 /**
  * jvm配置参数
@@ -6,6 +6,7 @@ package cn.ly;
  -Xmx4m -Xms4m
   去除逃逸分析
  -XX:-DoEscapeAnalysis
+ -XX:+DoEscapeAnalysis 开启逃逸分析
  -XX:+PrintGCDetails
  -XX:+HeapDumpOnOutOfMemoryError
  */
@@ -21,7 +22,7 @@ public class EscapeAnalysisTest {
         System.out.println("cost " + (a2 - a1) + " ms");
         // 为了方便查看堆内存中对象个数，线程sleep
         try {
-            Thread.sleep(100000);
+            Thread.sleep(1000000);
         } catch (
                 InterruptedException e1) {
             e1.printStackTrace();
