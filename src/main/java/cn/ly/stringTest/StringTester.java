@@ -6,6 +6,7 @@ public class StringTester {
         StringTester st = new StringTester();
         st.checkStringAddress1();
         st.checkStringAddress2();
+        st.checkStringAddress3();
     }
 
     // Java8中的字符串常量池在Metaspace中
@@ -27,5 +28,12 @@ public class StringTester {
         System.out.println(s1 == s2.intern());
         //证明 s2.intern返回的是 ”haha“的字符串引用
         System.out.println("haha" == s2.intern());
+    }
+
+    private void checkStringAddress3() {
+        String s1 = new String("java");
+
+        //证明 s2.intern返回的是 ”haha“的字符串引用
+        System.out.println("java" == s1);
     }
 }
