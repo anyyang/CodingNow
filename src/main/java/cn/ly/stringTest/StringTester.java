@@ -4,9 +4,11 @@ public class StringTester {
 
     public static void main(String[] args) {
         StringTester st = new StringTester();
-        st.checkStringAddress1();
-        st.checkStringAddress2();
-        st.checkStringAddress3();
+        String str = "ss";
+        str.substring(0,-1);
+        // st.checkStringAddress1();
+       // st.checkStringAddress2();
+        //st.checkStringAddress3();
     }
 
     // Java8中的字符串常量池在Metaspace中
