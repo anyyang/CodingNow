@@ -5,6 +5,13 @@ import java.util.concurrent.FutureTask;
 
 public class FutureTaskTest {
 
+
+    /**
+     *  Future 异步线程有个最大问题就是调用get方法的时候 会阻塞。
+     * @param args
+     * @throws Exception
+     */
+
     public static void main(String[] args) throws Exception {
         //这种方式 get如果不放到最后调用 会被阻塞。 就是如果
       //  test1();
