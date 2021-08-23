@@ -2,21 +2,25 @@ package cn.ly.manyThread.callback;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
 public class FutureTaskTest {
 
 
     /**
-     *  Future 异步线程有个最大问题就是调用get方法的时候 会阻塞。
+     * Future 异步线程有个最大问题就是调用get方法的时候 会阻塞。
+     *
      * @param args
      * @throws Exception
      */
 
     public static void main(String[] args) throws Exception {
         //这种方式 get如果不放到最后调用 会被阻塞。 就是如果
-      //  test1();
+        //  test1();
         //修改test1  采用轮询才替代阻塞
-        test2();
+        //test2();
+        // 延时调用结果
+        test3();
     }
 
 
@@ -54,10 +58,34 @@ public class FutureTaskTest {
             if (futureTask.isDone()) {
                 flag = false;
                 System.out.println("异步线程执行完毕");
-            }else{
+            } else {
                 Thread.sleep(1000);
                 System.out.println("异步线程执行完了吗？");
             }
         }
     }
+
+
+    public static void test3() throws Exception {
+        //创建异步执行任务
+        FutureTask<Integer> futureTask = new FutureTask<Integer>(() -> {
+            System.out.println("future2 Task sleep!");
+            Thread.sleep(20000);
+            return 1;
+        });
+        //开启后台辅助线程
+        Thread thread = new Thread(futureTask, "threadName");
+        thread.start();
+        System.out.println("mainThread------");
+        try{
+            Integer result = futureTask.get(2, TimeUnit.SECONDS);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            System.out.println("爷等不起，爷不等了");
+        }
+
+
+    }
+
 }
