@@ -1,4 +1,4 @@
-package cn.ly.threadSafe;
+package cn.ly.manyThread.callback.threadSafe;
 
 import java.util.concurrent.locks.ReentrantLock;
 
